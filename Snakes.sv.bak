@@ -1,0 +1,57 @@
+module Snakes (clk, led);
+
+input clk;
+output reg led [15:0];
+
+reg stat[15:0];
+reg [31:0] i, j, ctr;
+
+initial
+begin
+
+	i = 32'b0;
+	j = 32'b0;
+	
+	ctr = 32'b0;
+	
+	for(j = 0; j < 15; j = j + 1) 
+		stat[j] = 1'b0;
+	
+end
+
+always @ (posedge clk) 
+	begin
+		ctr <= ctr + 1'b1;
+	
+		if (ctr > 25000000)
+	
+		begin
+			
+			stat[i] = ~stat[i];  // Turns off current led
+			i = i + 1;			   // Increase the couner
+			if (i == 15) i = 0;  // To move in a cycle
+			stat[i] = ~stat[i];  // Turn on next led
+			ctr = 32'b0;
+
+		end
+
+end 
+
+assign led[0] = stat[0];
+assign led[1] = stat[1];
+assign led[2] = stat[2];
+assign led[3] = stat[3];
+assign led[4] = stat[4];
+assign led[5] = stat[5];
+assign led[6] = stat[6];
+assign led[7] = stat[7];
+assign led[8] = stat[8];
+assign led[9] = stat[9];
+assign led[10] = stat[10];
+assign led[11] = stat[11];
+assign led[12] = stat[12];
+assign led[13] = stat[13];
+assign led[14] = stat[14];
+
+	
+endmodule 
